@@ -1,0 +1,157 @@
+<HTML>
+<HEAD>
+<TITLE>.:: Logotipo ::.</TITLE>
+<STYLE TYPE="TEXT/CSS">
+body {
+	margin: 0px;
+	border 0px;
+}
+body,td,table {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 56px;
+	color: #FFFFFF;
+	background-color: #000000;
+	cursor: hand;
+}
+.modelo {
+	text-align: center;
+	border-color: #DDDDDD;
+	border-style: groove;
+	border-width: 10px;
+	padding: 40px;
+	background-color: #FFFFFF;
+}
+table {
+	border-collapse: collapse;
+	empty-cells: show;
+}
+.fonte {
+	font-weight: bold;
+	font-size: 12px;
+	border: 0px;
+	padding: 10px;
+}
+</STYLE>
+<SCRIPT LANGUAGE="JAVASCRIPT" TYPE="TEXT/JAVASCRIPT">
+function fonte(nome) {
+	for (var n = 1; n <= 10; n++) {
+		if (document.getElementById('td_modelo' + n) != null) {
+			document.getElementById('td_modelo' + n).style.fontFamily = nome;
+		}
+	}
+}
+function negrito(rdg_negrito) {
+	var negrito = '';
+	if (rdg_negrito.value == 'Sim') {
+		negrito = 'bold';
+	}
+	for (var n = 1; n <= 10; n++) {
+		if (document.getElementById('td_modelo' + n) != null) {
+			document.getElementById('td_modelo' + n).style.fontWeight = negrito;
+		}
+	}
+}
+function italico(rdg_italico) {
+	var italico = '';
+	if (rdg_italico.value == 'Sim') {
+		italico = 'italic';
+	}
+	for (var n = 1; n <= 10; n++) {
+		if (document.getElementById('td_modelo' + n) != null) {
+			document.getElementById('td_modelo' + n).style.fontStyle = italico;
+		}
+	}
+}
+function sublinhado(rdg_sublinhado) {
+	var sublinhado = '';
+	if (rdg_sublinhado.value == 'Sim') {
+		sublinhado = 'underline';
+	}
+	for (var n = 1; n <= 10; n++) {
+		if (document.getElementById('td_modelo' + n) != null) {
+			document.getElementById('td_modelo' + n).style.textDecoration = sublinhado;
+		}
+	}
+}
+function fontes() {
+	var sel_fontes = document.getElementById('sel_fontes');
+	var dlgHelper = document.getElementById('dlgHelper');
+
+	var nomes_fontes = new Array();
+	for (var n = 0; n < dlgHelper.fonts.count; n++) {
+		nomes_fontes[n] = dlgHelper.fonts(n + 1);
+	}
+	nomes_fontes = nomes_fontes.sort();
+	for (var n = 0; n < nomes_fontes.length; n++) {
+		var op_novo_nome = document.createElement('OPTION');
+		sel_fontes.add(op_novo_nome);
+		op_novo_nome.value = nomes_fontes[n];
+		op_novo_nome.innerText = (n + 1) + ' - ' + nomes_fontes[n];
+	}
+	muda_nome();
+}
+function muda_cor(texto) {
+	var dlgHelper = document.getElementById('dlgHelper');
+	var nome_tag = texto.tagName.toUpperCase();
+	if (texto.tagName == 'TD') {
+		texto.style.color = dlgHelper.ChooseColorDlg();
+	}
+}
+function muda_nome() {
+	var txt_nome = document.getElementById('txt_nome');
+	for (var n = 1; n <= 10; n++) {
+		if (document.getElementById('td_modelo' + n) != null) {
+			document.getElementById('td_modelo' + n).innerText = txt_nome.value;
+		}
+	}
+}
+</SCRIPT>
+</HEAD>
+<BODY SCROLL="NO" onLoad="fontes();">
+<TABLE ALIGN="CENTER">
+	<TR>
+		<TD CLASS="fonte">Fontes:</TD>
+		<TD CLASS="fonte" onClick="fonte('Anna');">Anna</TD>
+		<TD CLASS="fonte" onClick="fonte('Cupertino');">Cupertino</TD>
+		<TD CLASS="fonte" onClick="fonte('Eras Medium ITC');">Eras</TD>
+		<TD CLASS="fonte" onClick="fonte('Harlow Solid Italic');">Harlow</TD>
+		<TD CLASS="fonte" onClick="fonte('Magneto');">Magneto</TD>
+		<TD CLASS="fonte" onClick="fonte('OCR A Extended');">Ocra</TD>
+		<TD CLASS="fonte" onClick="fonte('Serpentine-Medium');">Serpentine</TD>
+		<TD CLASS="fonte">
+			<SELECT NAME="sel_fontes" ID="sel_fontes" onChange="fonte(this.value);">
+				<OPTION VALUE="">Outra Fonte</OPTION>
+			</SELECT>
+		</TD>
+	</TR>
+</TABLE>
+<TABLE ALIGN="CENTER">
+	<TR>
+		<TD CLASS="fonte">Nome:</TD>
+		<TD CLASS="fonte"><INPUT TYPE="TEXT" NAME="txt_nome" ID="txt_nome" onKeyUp="muda_nome();" SIZE="26" MAXLENGTH="25"></TD>
+		<TD CLASS="fonte">Negrito:</TD>
+		<TD CLASS="fonte"><INPUT TYPE="RADIO" NAME="rdg_negrito" ID="rdg_negrito" VALUE="Sim" onClick="negrito(this);">Sim<INPUT TYPE="RADIO" NAME="rdg_negrito" ID="rdg_negrito" VALUE="Não" onClick="negrito(this);" CHECKED>Não</TD>
+		<TD CLASS="fonte">Itálico:</TD>
+		<TD CLASS="fonte"><INPUT TYPE="RADIO" NAME="rdg_italico" ID="rdg_italico" VALUE="Sim" onClick="italico(this);">Sim<INPUT TYPE="RADIO" NAME="rdg_italico" ID="rdg_italico" VALUE="Não" onClick="italico(this);" CHECKED>Não</TD>
+		<TD CLASS="fonte">Sublinhado:</TD>
+		<TD CLASS="fonte"><INPUT TYPE="RADIO" NAME="rdg_sublinhado" ID="rdg_sublinhado" VALUE="Sim" onClick="sublinhado(this);">Sim<INPUT TYPE="RADIO" NAME="rdg_sublinhado" ID="rdg_sublinhado" VALUE="Não" onClick="sublinhado(this);" CHECKED>Não</TD>
+	</TR>
+</TABLE>
+<TABLE STYLE="width: 100%;">
+	<TR>
+		<TD ID="td_modelo1" CLASS="modelo" STYLE="color: #00FF00;" onClick="muda_cor(this);">&nbsp;</TD>
+		<TD ID="td_modelo2" CLASS="modelo" STYLE="color: #FFFF00;" onClick="muda_cor(this);">&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD ID="td_modelo3" CLASS="modelo" STYLE="color: #FF0000;" onClick="muda_cor(this);">&nbsp;</TD>
+		<TD ID="td_modelo4" CLASS="modelo" STYLE="color: #0000FF;" onClick="muda_cor(this);">&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD ID="td_modelo5" CLASS="modelo" STYLE="color: #9900FF;" onClick="muda_cor(this);">&nbsp;</TD>
+		<TD ID="td_modelo6" CLASS="modelo" STYLE="color: #000000;" onClick="muda_cor(this);">&nbsp;</TD>
+	</TR>
+</TABLE>
+<OBJECT ID="dlgHelper" CLASSID="clsid:3050f819-98b5-11cf-bb82-00aa00bdce0b" WIDTH="0px" HEIGHT="0px"></OBJECT>
+<SCRIPT LANGUAGE="JAVASCRIPT" TYPE="TEXT/JAVASCRIPT">document.getElementById('txt_nome').value = ''; document.getElementById('txt_nome').focus();</SCRIPT>
+</BODY>
+</HTML>
